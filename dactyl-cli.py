@@ -2,8 +2,8 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-files = ["111458.npz", "112111.npz", "112533.npz", "121707.npz", "121738.npz", "123019.npz", "123451.npz"]
 
 fixes = [None, "Abs", "Flip sign (-)"]
 fixFns = {
@@ -88,7 +88,7 @@ commandFns = {
 	None: noop
 }
 
-def get_user_file_choice():
+def get_user_file_choice(files):
 	print "Pick one of the following files to parse:"
 	for i,f in enumerate(files):
 		print i, ")", f
@@ -118,9 +118,15 @@ def parse_and_display(filename):
 
 
 if __name__ == "__main__":
+	
+	files = []
+	for f in os.listdir('./'):
+		if f.endswith('.npz'):
+			files.append(f)
+
 	choice = None
 	while choice is None:
-		choice = get_user_file_choice()
+		choice = get_user_file_choice(files)
 
 	print "You chose: ", choice
 	print "Parsing...."
