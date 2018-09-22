@@ -124,6 +124,8 @@ if __name__ == "__main__":
 		if f.endswith('.npz'):
 			files.append(f)
 
+	files.sort()
+
 	choice = None
 	while choice is None:
 		choice = get_user_file_choice(files)
