@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import os
 
 
-fixes = [None, "Abs", "Flip sign (-)", "Multiply by 500", "Format Enum"]
+fixes = [None, "Abs", "Flip sign (-)", "Multiply by 500", "Format Enum * 500"]
 fixFns = {
 	None: lambda v: v,
 	"Abs": lambda v: abs(v),
@@ -46,7 +46,7 @@ def get_user_signal_choice(data, dtype):
 
 def get_data_schema(data):
 	enums = list(set([str(e) for e in data]))
-	return {enum: i for i,enum in enumerate(enums)}
+	return {enum: i*500 for i,enum in enumerate(enums)}
 
 def apply_schema(schema, data):
 	return map(lambda d: schema[str(d)], data)
@@ -74,7 +74,7 @@ def new_subplot(data):
 	print "Fix selected: ", fix
 	
 	fixed_data = None
-	if fix != "Format Enum":
+	if fix != "Format Enum * 500":
 		fixed_data = map(fixFns[fix], data[dtype][signal])
 	else:
 		schema = get_data_schema(data[dtype][signal])
