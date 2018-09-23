@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 import os
 
 
-fixes = [None, "Abs", "Flip sign (-)"]
+fixes = [None, "Abs", "Flip sign (-)", "Multiply by 500"]
 fixFns = {
 	None: lambda v: v,
 	"Abs": lambda v: abs(v),
-	"Flip sign (-)": lambda v: -v
+	"Flip sign (-)": lambda v: -1.0 * v,
+	"Multiply by 500": lambda v: 500 * v
 }
 
 def get_user_fix_choice():
