@@ -5,12 +5,13 @@ import matplotlib.pyplot as plt
 import os
 
 
-fixes = [None, "Abs", "Flip sign (-)", "Multiply by 500", "Format Enum * 500"]
+fixes = [None, "Abs", "Flip sign (-)", "Multiply by 500", "Divide by 1000", "Format Enum * 500"]
 fixFns = {
 	None: lambda v: v,
 	"Abs": lambda v: abs(v),
 	"Flip sign (-)": lambda v: -1.0 * v,
-	"Multiply by 500": lambda v: 500 * v
+	"Multiply by 500": lambda v: 500 * v,
+	"Divide by 1000": lambda v: float(v) / 1000
 }
 
 def get_user_fix_choice():
