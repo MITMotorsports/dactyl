@@ -133,7 +133,7 @@ class Program(object):
     def load(self):
         pass
 
-def askq_enum(q_string, items, sort_vals=True, multiple=False, clear=True):
+def askq_enum(q_string, items, sort_vals=True, multiple=False, clear=True, return_index=False):
     if clear:
         clear_screen()
     
@@ -156,7 +156,7 @@ def askq_enum(q_string, items, sort_vals=True, multiple=False, clear=True):
             v = int(v)
             if not (0 <= v < len(items)):
                 raise ValueError
-            output.append(sorted_list[v])
+            output.append(sorted_list[v] if not return_index else v)
         except ValueError:
             global err
             err = True
@@ -261,6 +261,7 @@ if __name__ == "__main__":
                     "New signal",
                     "Display",
                     "Remove graph",
+                    "Remove message",
                     #"Remove signal",
                     "Load another file",
                     "Load another program",
@@ -340,6 +341,14 @@ if __name__ == "__main__":
                 pc.remove_graph(choice)
         elif choice == "Remove signal":
             pass
+        elif choice == "Remove message":
+            choice = askq_enum("From what graph (index)?\n>> ", pc.graphs, sort_vals=False, return_index=True)
+            if choice is not None:
+                m_choice = askq_enum("What message would you like to remove (index)?\n>> ", 
+                        pc.graphs[choice].msgs.keys())
+                if m_choice is not None:
+                    del pc.graphs[choice].msgs[m_choice]
+
         elif choice == "Load another file":
             result = load_data_file()
             if result is not None:
